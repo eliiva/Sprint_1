@@ -15,13 +15,15 @@ tickets = {
 }
 
 def delete_dobbles(tickets):
-    for i in range(1, len(tickets)):
+    clear_tickets = set()
+    result = {}
+    for i in range(1, len(tickets)+1):
+        result[i] = []
         for ticket_to_check in tickets[i]:
-            for j in range(i+1, len(tickets)+1):
-                for ticket_delete_candidate in tickets[j]:
-                    if ticket_to_check == ticket_delete_candidate:
-                        tickets[j].remove(ticket_delete_candidate)
-    return tickets
+            if ticket_to_check not in clear_tickets:
+                clear_tickets.add(ticket_to_check)
+                result[i].append(ticket_to_check)
+    return result
 
 def get_tickets_by_type(types, tickets):
     tickets_by_type = {}
